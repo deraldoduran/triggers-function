@@ -21,4 +21,9 @@ IF NEW.salario < 0 THEN
   $funcionarios_gatilho$
   LANGUAGE plpgsql;
   
+  --criando o gatilho trigger
+  CREATE TRIGGER funcionarios_gatilho BEFORE
+  INSERT OR UPDATE ON  funcionarios
+  FOR EACH ROW EXECUTE PROCEDURE funcionarios_gatilho();
+  
   

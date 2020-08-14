@@ -26,4 +26,17 @@ IF NEW.salario < 0 THEN
   INSERT OR UPDATE ON  funcionarios
   FOR EACH ROW EXECUTE PROCEDURE funcionarios_gatilho();
   
+  CREATE TABLE IF NOT EXISTS funcionario2(
+    nome VARCHAR(20) NOT NULL,
+    salario NUMERIC(10,2)
+    );
   
+CREATE TABLE IF NOT EXISTS funcionario_auditoria(
+  operacao VARCHAR(20) NOT NULL,
+  usuario VARCHAR(20) NOT NULL,
+  DATA TIMESTAMP NOT NULL,
+  nome_atual VARCHAR(40) NOT NULL,
+  salario_atual NUMERIC(10,2),
+  nome_antigo VARCHAR(40) NOT NULL,
+  salario_antigo NUMERIC(10,2)
+  );

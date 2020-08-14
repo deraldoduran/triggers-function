@@ -40,3 +40,27 @@ CREATE TABLE IF NOT EXISTS funcionario_auditoria(
   nome_antigo VARCHAR(40) NOT NULL,
   salario_antigo NUMERIC(10,2)
   );
+
+--TRIGGER FUNCTION QUE VAI ALIMENTAR A TABELA funcionario_auditoria
+
+CREATE OR REPLACE FUNCTION processa_func_audit() RETURNS
+TRIGGER AS $log$
+BEGIN
+  IF (TG_OP = 'DELETE') THEN
+  INSERT INTO funcionario_auditoria SELECT 'EXCLUSAO', USER, NOW(), NEW.*, OLD.*;
+  RETURN OLD;
+  ELSIF (TG_OP = 'UPDATE') THEN
+  INSERT INTO funcionario_auditoria SELECT 'ATUALIZACAO', USER, NOW(), NEW.*, OLD.*;
+  RETURN NEW;
+   ELSIF (TG_OP = 'INSERT') THEN
+  INSERT INTO funcionario_auditoria SELECT 'INSERCAO', USER, NOW(), NEW.*, OLD.*;
+  RETURN NEW;
+  END IF;
+  RETURN NULL;
+END;
+$log$ LANGUAGE plpgsql;
+
+CREATE TRIGGER func_audit
+AFTER INSERT OR UPDATE OR DELETE
+ON funcionario2
+FOR EACH ROW EXECUTE PROCEDURE processa_func_audit();

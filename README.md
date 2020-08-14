@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS funcionario_auditoria(
   DATA TIMESTAMP NOT NULL,
   nome_atual VARCHAR(40) NOT NULL,
   salario_atual NUMERIC(10,2),
-  nome_antigo VARCHAR(40) NOT NULL,
+  nome_antigo VARCHAR(40),
   salario_antigo NUMERIC(10,2)
   );
 
@@ -53,7 +53,7 @@ BEGIN
   INSERT INTO funcionario_auditoria SELECT 'ATUALIZACAO', USER, NOW(), NEW.*, OLD.*;
   RETURN NEW;
    ELSIF (TG_OP = 'INSERT') THEN
-  INSERT INTO funcionario_auditoria SELECT 'INSERCAO', USER, NOW(), NEW.*, OLD.*;
+  INSERT INTO funcionario_auditoria SELECT 'INSERCAO', USER, NOW(), NEW.*;
   RETURN NEW;
   END IF;
   RETURN NULL;

@@ -20,8 +20,7 @@ IF NEW.salario < 0 THEN
   END;
   $funcionarios_gatilho$
   LANGUAGE plpgsql;
-  ```
-  ```SQL
+    
   --criando o gatilho trigger
   CREATE TRIGGER funcionarios_gatilho BEFORE
   INSERT OR UPDATE ON  funcionarios
@@ -31,7 +30,8 @@ IF NEW.salario < 0 THEN
     nome VARCHAR(20) NOT NULL,
     salario NUMERIC(10,2)
     );
-  
+   ```
+    ```SQL
 CREATE TABLE IF NOT EXISTS funcionario_auditoria(
   operacao VARCHAR(20) NOT NULL,
   usuario VARCHAR(20) NOT NULL,

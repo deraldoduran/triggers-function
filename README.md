@@ -21,6 +21,7 @@ IF NEW.salario < 0 THEN
   $funcionarios_gatilho$
   LANGUAGE plpgsql;
   ```
+  ```SQL
   --criando o gatilho trigger
   CREATE TRIGGER funcionarios_gatilho BEFORE
   INSERT OR UPDATE ON  funcionarios
@@ -64,3 +65,4 @@ CREATE TRIGGER func_audit
 AFTER INSERT OR UPDATE OR DELETE
 ON funcionario2
 FOR EACH ROW EXECUTE PROCEDURE processa_func_audit();
+```

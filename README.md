@@ -1,6 +1,6 @@
 # triggers-function
 em outras linguagens é o PROCEDURE
-
+```SQL
 CREATE FUNCTION funcionarios_gatilho() RETURNS TRIGGER AS $funcionarios_gatilho$
   BEGIN
   IF NEW.nome IS NULL THEN
@@ -20,7 +20,7 @@ IF NEW.salario < 0 THEN
   END;
   $funcionarios_gatilho$
   LANGUAGE plpgsql;
-  
+  ```
   --criando o gatilho trigger
   CREATE TRIGGER funcionarios_gatilho BEFORE
   INSERT OR UPDATE ON  funcionarios

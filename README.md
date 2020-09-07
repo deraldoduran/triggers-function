@@ -31,7 +31,7 @@ IF NEW.salario < 0 THEN
     salario NUMERIC(10,2)
     );
    ```
-    ```SQL
+```SQL
 CREATE TABLE IF NOT EXISTS funcionario_auditoria(
   operacao VARCHAR(20) NOT NULL,
   usuario VARCHAR(20) NOT NULL,
